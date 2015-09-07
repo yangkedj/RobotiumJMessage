@@ -176,7 +176,6 @@ public class Test_JMessage_Profile extends ActivityInstrumentationTestCase2<Main
 		
 //      点击修改
 		solo.clickOnButton("updateUserPassword");
-		solo.sleep(3000);
 	}
 	
 	/**
@@ -296,29 +295,29 @@ public class Test_JMessage_Profile extends ActivityInstrumentationTestCase2<Main
 		Login(ExitUserName, ExitUserPasswd);
 		
 		
-		Log.d(TAG, "@@@@@@ 5进行Profile维护，条件是有用户登录");
+		Log.d(TAG, "||||||| 5进行Profile维护，条件是有用户登录");
 		
 		
 		// 获取本地个人信息
-		Log.d(TAG, "@@@@@@ 5.1 获取本地个人信息");
+		Log.d(TAG, "||||||| 5.1 获取本地个人信息");
 		getCurrentUser();
 		
 		
 		// 发起网络获取个人信息
-		Log.d(TAG, "@@@@@@ 5.2.1 测试获取不存在用户:"+UnExitUserName+"的userinfo,");
+		Log.d(TAG, "||||||| 5.2.1 测试获取不存在用户:"+UnExitUserName+"的userinfo,");
 		getUserInfo(UnExitUserName);
 		
-		Log.d(TAG, "@@@@@@ 5.2.2 测试非法用户名:"+IllegalUserName+"的userinfo");
+		Log.d(TAG, "||||||| 5.2.2 测试非法用户名:"+IllegalUserName+"的userinfo");
 		getUserInfo(IllegalUserName);
 		
-		Log.d(TAG, "@@@@@@ 5.2.3 测试已经存在的用户"+ExitUserName+"的userinfo,");
+		Log.d(TAG, "||||||| 5.2.3 测试已经存在的用户"+ExitUserName+"的userinfo,");
 		getUserInfo(ExitUserName);
 		
 		// 修改密码
-		Log.d(TAG, "@@@@@@ 5.3.1修改个人密码-测试用户名是:"+ExitUserName+",输入错误的旧密码:"+IllegalUserPasswd);
+		Log.d(TAG, "||||||| 5.3.1修改个人密码-测试用户名是:"+ExitUserName+",输入错误的旧密码:"+IllegalUserPasswd);
 		updateUserPassword(IllegalUserPasswd, "111111");
 		
-		Log.d(TAG, "@@@@@@ 5.3.2修改个人密码-测试用户名是:"+ExitUserName+",输入正确的旧密码:"+ExitUserPasswd+"错误的新密码（小于4位；大于128位）");
+		Log.d(TAG, "||||||| 5.3.2修改个人密码-测试用户名是:"+ExitUserName+",输入正确的旧密码:"+ExitUserPasswd+"错误的新密码（小于4位；大于128位）");
 		String LT4 = LessThan4bytes();
 		Log.d(TAG, "小于4位的新密码值:"+LT4);
 		updateUserPassword(ExitUserPasswd, LT4);
@@ -327,7 +326,7 @@ public class Test_JMessage_Profile extends ActivityInstrumentationTestCase2<Main
 		Log.d(TAG, "大于128位的新密码值:"+MT128);
 		updateUserPassword(ExitUserPasswd, MT128);
 		
-		Log.d(TAG, "@@@@@@ 5.3.3修改个人密码-测试用户名是:"+ExitUserName+",输入正确的旧密码:"+ExitUserPasswd+"合法的新密码:"+"111111");
+		Log.d(TAG, "||||||| 5.3.3修改个人密码-测试用户名是:"+ExitUserName+",输入正确的旧密码:"+ExitUserPasswd+"合法的新密码:"+"111111");
 		updateUserPassword(ExitUserPasswd, "111111");
 		
 		Log.d(TAG, "修改新密码后，测试登录是否成功");
@@ -338,55 +337,55 @@ public class Test_JMessage_Profile extends ActivityInstrumentationTestCase2<Main
 		
 		
 		// 修改个人昵称
-		Log.d(TAG, "@@@@@@ 5.4.1修改个人昵称-不超过64字节");
+		Log.d(TAG, "||||||| 5.4.1修改个人昵称-不超过64字节");
 		String LT64 = RandomString(10);
 		Log.d(TAG, "小于64位的昵称值:"+LT64);
 		updateUserNickName(LT64);
 		getUserInfo(ExitUserName);
 		
-		Log.d(TAG, "@@@@@@ 5.4.2修改个人昵称-测试超过64字节");
+		Log.d(TAG, "||||||| 5.4.2修改个人昵称-测试超过64字节");
 		String MT64 = MoreThan64bytes();
 		Log.d(TAG, "大于64位的昵称值:"+MT64);
 		updateUserNickName(MT64);
 		getUserInfo(ExitUserName);
 		
 		// 修改生日
-		Log.d(TAG, "@@@@@@ 5.5修改生日信息");
-		updateUserBirthday(RandomString(5));
+		Log.d(TAG, "||||||| 5.5修改生日信息");
+		updateUserBirthday(String.valueOf(System.currentTimeMillis()));
 		
 		
 		// 修改个性签名
-		Log.d(TAG, "@@@@@@ 5.6.1修改个性签名信息");
+		Log.d(TAG, "||||||| 5.6.1修改个性签名信息");
 		String nicknl = RandomString(5);
 		Log.d(TAG, "5位长度的昵称值:"+nicknl);
 		updateUserSignature(nicknl);
 		getUserInfo(ExitUserName);
 		
-		Log.d(TAG, "@@@@@@ 5.6.2修改个性签名信息-测试超过250字节");
+		Log.d(TAG, "||||||| 5.6.2修改个性签名信息-测试超过250字节");
 		String MT250 = MoreThan250bytes();
 		Log.d(TAG, "大于250位的个性签名值:"+MT250);
 		updateUserSignature(MT250);
 		getUserInfo(ExitUserName);
 		
 		// 修改性别
-		Log.d(TAG, "@@@@@@ 5.7.1修改性别信息-未知");
+		Log.d(TAG, "||||||| 5.7.1修改性别信息-未知");
 		updateUserGender("未知");
 		getUserInfo(ExitUserName);
 		
-		Log.d(TAG, "@@@@@@ 5.7.2修改性别信息-男");
+		Log.d(TAG, "||||||| 5.7.2修改性别信息-男");
 		updateUserGender("男");
 		getUserInfo(ExitUserName);
 		
-		Log.d(TAG, "@@@@@@ 5.7.3修改性别信息-女");
+		Log.d(TAG, "||||||| 5.7.3修改性别信息-女");
 		updateUserGender("女");
 		getUserInfo(ExitUserName);
 		
 		// 修改地区
-		Log.d(TAG, "@@@@@@ 5.8.1修改地区信息");
+		Log.d(TAG, "||||||| 5.8.1修改地区信息");
 		updateUserRegion(RandomString(6));
 		getUserInfo(ExitUserName);
 		
-		Log.d(TAG, "@@@@@@ 5.8.2修改地区信息-大于250字节");
+		Log.d(TAG, "||||||| 5.8.2修改地区信息-大于250字节");
 		String MT250_ = MoreThan250bytes();
 		Log.d(TAG, "大于250位的地区值:"+MT250);
 		updateUserRegion(MT250_);
